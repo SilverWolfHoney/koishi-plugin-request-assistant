@@ -1,14 +1,16 @@
 {
   "name": "koishi-plugin-request-assistant",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "自动同意好友申请和群邀请，并把入群申请发到群里让群主/管理员审批。",
   "main": "index.js",
+  "type": "commonjs",
   "author": "SilverWolfHoney",
+  "license": "MIT",
+  "homepage": "https://github.com/SilverWolfHoney/koishi-plugin-request-assistant",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SilverWolfHoney/koishi-plugin-request-assistant.git"
   },
-  "homepage": "https://github.com/SilverWolfHoney/koishi-plugin-request-assistant",
   "bugs": {
     "url": "https://github.com/SilverWolfHoney/koishi-plugin-request-assistant/issues"
   },
@@ -28,11 +30,16 @@
     "qq",
     "friend-request",
     "group-request",
-    "chatbot"
+    "group-invite",
+    "chatbot",
+    "chatluna"
   ],
-  "license": "MIT",
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "koishi": "^4.18.0",
+    "@langchain/core": "^0.3.0"
   },
   "peerDependencies": {
     "koishi": "^4.18.0",
@@ -41,6 +48,17 @@
   "peerDependenciesMeta": {
     "@langchain/core": {
       "optional": true
+    }
+  },
+  "koishi": {
+    "description": {
+      "en": "Auto-approve friend requests and group invites, and forward join requests to the group so the owner/admin can approve or reject them by replying.",
+      "zh": "自动同意好友申请和群邀请，并把入群申请发到群里让群主/管理员审批。"
+    },
+    "service": {
+      "optional": [
+        "chatluna"
+      ]
     }
   }
 }

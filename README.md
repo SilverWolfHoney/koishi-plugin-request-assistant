@@ -1,5 +1,9 @@
 # koishi-plugin-request-assistant
 
+[![npm](https://img.shields.io/npm/v/koishi-plugin-request-assistant.svg)](https://www.npmjs.com/package/koishi-plugin-request-assistant)
+[![npm downloads](https://img.shields.io/npm/dm/koishi-plugin-request-assistant.svg)](https://www.npmjs.com/package/koishi-plugin-request-assistant)
+[![license](https://img.shields.io/npm/l/koishi-plugin-request-assistant.svg)](https://github.com/SilverWolfHoney/koishi-plugin-request-assistant/blob/main/LICENSE)
+
 一个面向 NapCat / OneBot 11 的 Koishi 申请处理插件：自动同意好友申请和群邀请，并把入群申请发到群里，由群主或管理员引用通知回复「同意」或「拒绝」来处理。
 
 ## 功能
@@ -22,6 +26,19 @@
 > 插件调用了 NapCat 的部分扩展接口（`get_doubt_friends_add_request`、`set_doubt_friends_add_request`、`get_group_system_msg`），在其他 OneBot 实现上可能不可用。
 
 ## 安装
+
+### 从插件市场安装（推荐）
+
+在 Koishi 控制台打开「插件市场」，搜索 `request-assistant`（或包名 `koishi-plugin-request-assistant`），点击安装后在「插件配置」中启用并填写配置即可。
+
+### 使用包管理器安装
+
+```bash
+cd /path/to/koishi-app
+npm install koishi-plugin-request-assistant
+```
+
+安装后重启 Koishi（或让控制台热重载），在插件配置中启用 `request-assistant`。
 
 ### 从源码安装
 
@@ -91,6 +108,8 @@ plugins:
 
 启用 ChatLuna 和 `decisionModel` 后，模型会尝试理解更自然的表达；模型不可用或超时会自动退回关键词判断。
 
+> 如果只在同一个群里有**一条**待处理申请，也可以不引用通知，直接回复「同意」或「拒绝 理由」。
+
 ## 已知限制
 
 - **普通好友申请无法轮询。** NapCat 只暴露了 `get_doubt_friends_add_request`（已过滤/可疑申请队列），普通待处理申请在核心的 `getBuddyReq().buddyReqs` 里，没有对应的 OneBot action。因此插件依靠 `friend-request` 事件和好友验证私聊来处理，不做好友申请轮询。
@@ -101,10 +120,11 @@ plugins:
 ## 测试
 
 ```bash
+npm install
 npm test
 ```
 
-测试不依赖真实 QQ / NapCat，使用 mock 的 `ctx` 和 `bot.internal`。在独立目录运行前需要能解析到 `koishi`（可在 Koishi 应用目录内运行，或自行安装依赖）。
+测试不依赖真实 QQ / NapCat，使用 mock 的 `ctx` 和 `bot.internal`。`koishi` 与 `@langchain/core` 已列为开发依赖，`npm install` 后即可运行全部用例。
 
 ## License
 
